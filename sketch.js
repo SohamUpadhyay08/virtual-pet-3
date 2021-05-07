@@ -6,7 +6,7 @@ var dog,dogImg,happyDog,database,foodS,foodStock
 var fedTime
 var lastFed
 var foodObj
-var gameState = "Hungry"
+var GameState = "Hungry"
 var readState
 var garden,washroom,bedroom
 
@@ -30,9 +30,9 @@ function setup() {
   foodStock = database.ref('Food')
   foodStock.on("value",readStock)
   
-  readState = database.ref('gameState')
+  readState = database.ref('GameState')
   readState.on("value",function(data){
-    gameState = data.val();
+    GameState = data.val();
   })
 
   fedTime = database.ref('FeedTime');
@@ -58,9 +58,11 @@ function setup() {
 function draw() { 
   background("green") 
   //foodObj.display();
- 
 
-  if (gameState != "Hungry") {
+  
+ 
+  
+  if (GameState != "Hungry") {
     feed.hide();
     addFood.hide();
     dog.remove();
@@ -127,7 +129,7 @@ function addFoods(){
 
 function update(state){
   database.ref('/').update({
-    gameState:state
+    GameState:state
   })
 }
 
